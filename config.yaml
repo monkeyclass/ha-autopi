@@ -1,0 +1,13 @@
+name: "AutoPi Home Assistant"
+version: "0.1.0"
+slug: autppi_ha
+description: >-
+  "Home Assistant integration for AutoPi devices, replaces AutoPi Cloud and exposes it to mqtt"
+arch:
+  - amd64
+  - aarch64
+url: "https://github.com/monkeyclass/ha-autopi"
+ports:
+  4566/tcp: 4566
+startup: services
+image: repo/{arch}-my-custom-addon
