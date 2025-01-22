@@ -11,12 +11,10 @@ from database import create_db_and_tables, engine
 from models import EventCreate, Event
 
 app = FastAPI()
+
 security = HTTPBearer()
 load_dotenv()
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
+auth_token = os.getenv("AUTH_TOKEN")
 
 def get_session():
     with Session(engine) as session:
@@ -24,7 +22,9 @@ def get_session():
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
-auth_token = os.getenv("AUTH_TOKEN")
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
 
 async def validate_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     if credentials.credentials != auth_token:
