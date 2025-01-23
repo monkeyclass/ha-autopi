@@ -3,7 +3,7 @@
 Run the app
 
 ```sh
-poetry run uvicorn main:app --reload
+poetry run uvicorn app.main:app --reload
 ```
 
 # TO-DO
